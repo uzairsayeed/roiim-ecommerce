@@ -1,0 +1,417 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<script src="https://hosted.paysafe.com/checkout/v2/paysafe.checkout.min.js"></script>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+				<form id="form">
+					<div id="user-info">
+						<div class="form-field">
+							<input required class="form-control" type="text" name="name" placeholder="Name..">
+						</div>
+						<div class="form-field">
+							<input required class="form-control" type="email" name="email" placeholder="Email..">
+						</div>
+					</div>
+
+					<div id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Address..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="city" placeholder="City..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="state" placeholder="State..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="country" placeholder="Zip code..">
+						</div>
+					</div>
+
+					<hr>
+					<input class="btn btn-success btn-block" id="form-button" type="submit" value="Continue">
+				</form>
+			</div>
+
+			<br>
+
+			<div class="box-element hidden" id="payment-info">
+				<p>Paysafe Options:</p>
+				<hr>
+				<!-- <div id="paypal-button-container"></div> -->
+				<button class="btn btn-outline-dark" id="make-payment">Pay ${{order.get_cart_total|floatformat:2}}</button>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+				<a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+				
+				{% for item in items %}
+					<div class="cart-row">
+						<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+						<div style="flex:2"><p>{{item.product.name}}</p></div>
+						<div style="flex:1"><p>${{item.product.price|floatformat:2}}</p></div>
+						<div style="flex:1"><p>x{{item.quantity}}</p></div>
+					</div>
+				{% endfor %}
+
+				<h5>Items:	{{order.get_cart_items}}</h5>
+				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+			</div>
+		</div>
+	</div>
+
+	<!-- Include the PayPal JavaScript SDK -->
+	<!-- <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script> -->
+	<!-- <script>
+		var total = '{{order.get_cart_total}}'
+		// Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+			style: {
+				color: 'blue',
+				shape: 'pill',
+			},
+
+			// Set up the transaction
+			createOrder: function(data, actions) {
+				return actions.order.create({
+					purchase_units: [{
+						amount: {
+							value: parseFloat(total).toFixed(2)
+						}
+					}]
+				});
+			},
+
+			// Finalize the transaction
+			onApprove: function(data, actions) {
+				return actions.order.capture().then(function(details) {
+					// Show a success message to the buyer
+					submitFormData()
+				});
+			}
+
+
+		}).render('#paypal-button-container');
+	</script> --> 
+	
+	<!-- Custom Payment handler -->
+	<!-- <script type="text/javascript">
+		var shipping = '{{order.shipping}}'
+		var total = '{{order.get_cart_total|floatformat:2}}'
+
+		if(shipping == 'False') {
+			document.getElementById('shipping-info').innerHTML = ''
+		}
+
+		if(user != 'AnonymousUser') {
+			document.getElementById('user-info').innerHTML = ''
+		}
+
+		if(shipping == 'False' && user != 'AnonymousUser') {
+			// Hide entire FORM if user is logged in and shipping is false
+			document.getElementById('form-wrapper').classList.add("hidden")
+			// Show PAYMENT if logged in user wants to buy an item that dosn't require shipping
+			document.getElementById('payment-info').classList.remove("hidden")
+		}
+
+		var form = document.getElementById('form')
+		form.addEventListener('submit', function(e) {
+			e.preventDefault()
+			console.log('Form Submitted...')
+			document.getElementById('form-button').classList.add("hidden")
+			document.getElementById('payment-info').classList.remove("hidden")
+		})
+
+		document.getElementById('make-payment').addEventListener('click', function(e) {
+			submitFormData()
+		})
+
+		function submitFormData() {
+			console.log('Payment button clicked')
+
+			var userFormData = {
+				'name': null,
+				'email': null,
+				'total': total,
+			}
+
+			var shippingInfo = {
+				'address': null,
+				'city': null,
+				'state': null,
+				'zipcode': null,
+			}
+
+			if(shipping != 'False') {
+				shippingInfo.address = form.address.value
+				shippingInfo.city = form.city.value
+				shippingInfo.state = form.state.value
+				shippingInfo.zipcode = form.zipcode.value
+			}
+
+			if(user == 'AnonymousUser') {
+				userFormData.name = form.name.value
+				userFormData.email = form.email.value
+			}
+
+			var url = '/process_order/'
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': csrftoken,
+				},
+				body: JSON.stringify({'form': userFormData, 'shipping': shippingInfo})
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('SUCCESS: ', data)
+				alert('Transaction Completed')
+
+				cart = {}
+				document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+				window.location.href = "{% url 'store' %}"
+			})
+		}
+	</script> -->
+
+	<script>
+		function checkout() {
+			console.log('Payment button clicked')
+
+			var userFormData = {
+				'name': 'uzair',
+				'email': 'uzairsayeed@gmail.com',
+				'total': {{order.get_cart_total|floatformat:2}},
+			}
+
+			var shippingInfo = {
+				'address': null,
+				'city': null,
+				'state': null,
+				'zipcode': null,
+			}
+
+			if(shipping != 'False') {
+				shippingInfo.address = form.address.value
+				shippingInfo.city = form.city.value
+				shippingInfo.state = form.state.value
+				shippingInfo.zipcode = form.zipcode.value
+			}
+
+			if(user == 'AnonymousUser') {
+				userFormData.name = form.name.value
+				userFormData.email = form.email.value
+			}
+
+			userFormData.total *= 100
+
+			console.log(userFormData, shippingInfo);
+			console.log(typeof(userFormData.total));
+
+			var api = "cHVibGljLTc3NTE6Qi1xYTItMC01ZjAzMWNiZS0wLTMwMmQwMjE1MDA4OTBlZjI2MjI5NjU2M2FjY2QxY2I0YWFiNzkwMzIzZDJmZDU3MGQzMDIxNDUxMGJjZGFjZGFhNGYwM2Y1OTQ3N2VlZjEzZjJhZjVhZDEzZTMwNDQ="
+			paysafe.checkout.setup(api, {
+				"currency": "USD",
+				"amount": userFormData.total,
+				"locale": "en_US",
+				"customer": {
+					"firstName": userFormData.name,
+					"lastName": userFormData.name,
+					"email": userFormData.email,
+					"phone": "1234567890",
+					"dateOfBirth": {
+						"day": 5,
+						"month": 2,
+						"year": 1997
+					}
+				},
+				"billingAddress": {
+					"nickName": userFormData.name,
+					"street": "Jubilee Hills",
+					"street2": "Madhapur",
+					"city": shippingInfo.city,
+					"zip": shippingInfo.zipcode,
+					"country": "IN",
+					"state": shippingInfo.state
+				},
+				"environment": "TEST",
+				"merchantRefNum": "149900597607",
+				"canEditAmount": true,
+				"merchantDescriptor": {
+					"dynamicDescriptor": "XYZ",
+					"phone": "1234567890"
+					},
+				"displayPaymentMethods":["skrill","card"],
+				"paymentMethodDetails": {
+					"paysafecard": {
+						"consumerId": "1232323"
+					},
+					"paysafecash": {
+						"consumerId": "123456"
+					},
+					"sightline": {
+						"consumerId": "123456",
+						"SSN": "123456789",
+						"last4ssn": "6789",
+						"accountId":"1009688222"
+					},
+					"vippreferred":{
+						"consumerId": "550726575",
+						"accountId":"1679688456"
+					}
+				}
+			}, function(instance, error, result) {
+				if (result && result.paymentHandleToken) {
+					console.log(result.paymentHandleToken);
+					// make AJAX call to Payments API
+
+					var request = new XMLHttpRequest();
+
+					// console.log(request);
+
+					request.open('POST', 'https://api.test.paysafe.com/cardpayments/v1/accounts/1001912800/APIrequest', true);
+					request.setRequestHeader('Content-Type', 'application/json');
+                    request.setRequestHeader('Authorization', 'cHJpdmF0ZS03NzUxOkItcWEyLTAtNWYwMzFjZGQtMC0zMDJkMDIxNDQ5NmJlODQ3MzJhMDFmNjkwMjY4ZDNiOGViNzJlNWI4Y2NmOTRlMjIwMjE1MDA4NTkxMzExN2YyZTFhODUzMTUwNWVlOGNjZmM4ZTk4ZGYzY2YxNzQ4');
+					request.setRequestHeader('Simulator', '"EXTERNAL"');
+					
+					request.onreadystatechange = function () {
+					if (this.readyState === 4) {
+						console.log('Status:', this.status);
+						console.log('Headers:', this.getAllResponseHeaders());
+						console.log('Body:', this.responseText);
+					}
+					};
+
+					var body = {
+					'merchantRefNum': 'uzy123',
+					'amount': userFormData.total,
+					'currencyCode': 'USD',
+					'dupCheck': true,
+					'settleWithAuth': true,
+					'paymentHandleToken': result.paymentHandleToken,
+					'customerIp': '10.10.12.64',
+					'description': 'Magazine subscription'
+					};
+
+					request.send(JSON.stringify(body));
+					// alert('Transaction Completed')
+					cart = {}
+					document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+					window.location.href = "{% url 'store' %}"
+					submitFormData()
+
+				} else {
+					console.error(error);
+					// Handle the error
+				}
+			}, function(stage, expired) {
+				switch(stage) {
+					case "PAYMENT_HANDLE_NOT_CREATED": // Handle the scenario
+					case "PAYMENT_HANDLE_CREATED": // Handle the scenario
+					case "PAYMENT_HANDLE_REDIRECT": // Handle the scenario
+					case "PAYMENT_HANDLE_PAYABLE": // Handle the scenario
+					default: // Handle the scenario
+				}
+			});
+		}
+	</script>
+	<script>
+		var shipping = '{{order.shipping}}'
+		var total = '{{order.get_cart_total|floatformat:2}}'
+
+		if(shipping == 'False') {
+			document.getElementById('shipping-info').innerHTML = ''
+		}
+
+		if(user != 'AnonymousUser') {
+			document.getElementById('user-info').innerHTML = ''
+		}
+
+		if(shipping == 'False' && user != 'AnonymousUser') {
+			// Hide entire FORM if user is logged in and shipping is false
+			document.getElementById('form-wrapper').classList.add("hidden")
+			// Show PAYMENT if logged in user wants to buy an item that dosn't require shipping
+			document.getElementById('payment-info').classList.remove("hidden")
+		}
+
+		var form = document.getElementById('form')
+		form.addEventListener('submit', function(e) {
+			e.preventDefault()
+			console.log('Form Submitted...')
+			document.getElementById('form-button').classList.add("hidden")
+			document.getElementById('payment-info').classList.remove("hidden")
+		})
+
+		document.getElementById('make-payment').addEventListener('click', function(e) {
+			checkout()
+		})
+	</script>
+
+	<script>
+		function submitFormData() {
+			// console.log('Payment button clicked')
+
+			var userFormData = {
+				'name': null,
+				'email': null,
+				'total': total,
+			}
+
+			var shippingInfo = {
+				'address': null,
+				'city': null,
+				'state': null,
+				'zipcode': null,
+			}
+
+			if(shipping != 'False') {
+				shippingInfo.address = form.address.value
+				shippingInfo.city = form.city.value
+				shippingInfo.state = form.state.value
+				shippingInfo.zipcode = form.zipcode.value
+			}
+
+			if(user == 'AnonymousUser') {
+				userFormData.name = form.name.value
+				userFormData.email = form.email.value
+			}
+
+			var url = '/process_order/'
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': csrftoken,
+				},
+				body: JSON.stringify({'form': userFormData, 'shipping': shippingInfo})
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('SUCCESS: ', data)
+				// alert('Transaction Completed')
+
+				cart = {}
+				document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+				// window.location.href = "{% url 'store' %}"
+			})
+		}
+	</script>
+{% endblock content %}

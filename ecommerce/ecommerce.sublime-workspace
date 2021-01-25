@@ -1,0 +1,357 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"b",
+				"blog_list"
+			],
+			[
+				"c",
+				"context"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"p",
+				"published"
+			],
+			[
+				"ti",
+				"title"
+			],
+			[
+				"se",
+				"search"
+			],
+			[
+				"re",
+				"render"
+			],
+			[
+				"for",
+				"form"
+			],
+			[
+				"ur",
+				"urls"
+			],
+			[
+				"co",
+				"conf"
+			],
+			[
+				"stat",
+				"staticfiles"
+			],
+			[
+				"BA",
+				"BASE_DIR"
+			],
+			[
+				"u",
+				"user"
+			],
+			[
+				"g",
+				"get_queryset"
+			],
+			[
+				"B",
+				"BlogPostQuerySet"
+			],
+			[
+				"Blog",
+				"BlogPostManager"
+			],
+			[
+				"pu",
+				"publish_date"
+			],
+			[
+				"obj",
+				"objects"
+			],
+			[
+				"bl",
+				"blank"
+			],
+			[
+				"aut",
+				"auto_now_add"
+			],
+			[
+				"get",
+				"get_absolute_url"
+			],
+			[
+				"s",
+				"self"
+			],
+			[
+				"ob",
+				"objects"
+			],
+			[
+				"f",
+				"forms"
+			],
+			[
+				"C",
+				"ContactForm"
+			],
+			[
+				"a",
+				"action\tAttr"
+			],
+			[
+				"h",
+				"h1\tTag"
+			],
+			[
+				"fo",
+				"form\tTag"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"o",
+				"objects"
+			],
+			[
+				"l",
+				"li\tTag"
+			],
+			[
+				"t",
+				"template_name"
+			],
+			[
+				"tem",
+				"template_name"
+			],
+			[
+				"rende",
+				"rendered_item"
+			],
+			[
+				"r",
+				"render"
+			],
+			[
+				"te",
+				"template_obj"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"ab",
+				"about_page"
+			],
+			[
+				"home",
+				"home_page"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/templates/blog/list-inline.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/try_django/settings.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/searches/templates/searches/view.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/searches/views.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/searches/admin.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/searches/models.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/try_django/urls.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/navbar.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/views.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/templates/blog/form.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/forms.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/models.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/home.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/staticfiles/blank.txt",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/static_cdn_test/blank/blank.txt",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/templates/blog/detail.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/templates/blog/list.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/base.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/try_django/views.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/templates/blog/delete.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/js.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/form.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/try_django/forms.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/urls.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/blog_post_delete.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/blog_post_update.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/blog_post_create.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/blog_post_list.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/__init__.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/admin.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/blog_post_detail.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/tests.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/blog/apps.py",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/about.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/hello_world.html",
+		"/C/Users/umohammedsay/Desktop/DjangoProjects/src/templates/title.txt"
+	],
+	"find":
+	{
+		"height": 42.0
+	},
+	"find_in_files":
+	{
+		"height": 146.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"blog_post_detail_page"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 42.0
+	},
+	"input":
+	{
+		"height": 54.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 80.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 292.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

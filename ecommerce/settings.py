@@ -25,7 +25,7 @@ SECRET_KEY = '4j28oyuz^*17coiw5s%j8@7l^4ak)bp7kzxz0^)s1)lcugq10-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['roiim-assignment-ecomm-paysafe.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
